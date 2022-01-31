@@ -3,6 +3,8 @@ const app = express ();
 const mysql = require('mysql');
 const bcrypt = require('bcrypt'); 
 const generateAccessToken = require('./generateAccessToken');
+const autenticateToken = require('./auten');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 
@@ -105,6 +107,13 @@ app.post('/login', (req, res) => {
 
     })
 });
+
+app.get('/', autenticateToken, (req, res)=> {
+    res.sendStatus(200);
+    console.log(req.user);
+}); 
+
+
 
 
 app.listen(port, () => console.log(`Server Started on port ${port}...`)); 

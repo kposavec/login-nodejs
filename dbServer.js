@@ -17,11 +17,11 @@ const port = process.env.PORT;
 
 const db = mysql.createPool({
     connectionLimit:100,
-    host: DB_HOST, //'localhost',
-    port: DB_PORT,//'3306',
-    user: DB_USER,//'gradcako',
-    password: DB_PASSWORD, //'Cako20Grad', 
-    database: DB_NAME //'userDb'
+    host: DB_HOST,
+    port: DB_PORT,
+    user: DB_USER,
+    password: DB_PASSWORD, 
+    database: DB_NAME 
 }); 
 
 
@@ -32,6 +32,8 @@ db.getConnection((err, connection) => {
     console.log('DB connected successful: ' + connection.threadId);
 });
 
+
+//ADD USER
 app.post('/createuser', async (req, res) => {
     const user = req.body.name;
     const hashedPassword = await bcrypt.hash(req.body.password, 10); 
